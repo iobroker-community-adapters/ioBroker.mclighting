@@ -1,9 +1,13 @@
 'use strict';
-var utils =    require(__dirname + '/lib/utils');
+var utils = require(__dirname + '/lib/utils');
 var adapter = new utils.Adapter('mclighting');
 const WebSocket = require('ws');
-var ws, state_current = {},list_modes = null, flag = false, isAlive = false;
+var ws, state_current = {},
+    list_modes = null,
+    flag = false,
+    isAlive = false;
 var pingTimer, timeoutTimer;
+var rgbw;
 
 adapter.on('unload', function (callback) {
     try {
@@ -20,41 +24,41 @@ adapter.on('objectChange', function (id, obj) {
 
 // is called if a subscribed state changes
 adapter.on('stateChange', function (id, state) {
-    if (state && !state.ack){
+    if (state && !state.ack) {
         adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
         var ids = id.split(".");
         var name = ids[ids.length - 2].toString();
         var command = ids[ids.length - 1].toString();
         var val = state.val;
-        if (command == 'mode'){
+        if (command == 'mode') {
             send('=' + val);
         }
-        if (command == 'fx_mode'){
+        if (command == 'fx_mode') {
             send('/' + val);
         }
-        if (command == 'color'){
+        if (command == 'color') {
             var c = val.split(",");
-            if(state_current.ws2812fx_mode !== 0){
+            if (state_current.ws2812fx_mode !== 0) {
                 send('#' + rgbToHex(parseInt(c[0]), parseInt(c[1]), parseInt(c[2])));
             } else {
                 send('*' + rgbToHex(parseInt(c[0]), parseInt(c[1]), parseInt(c[2])));
             }
         }
-        if (command == 'color_R' || command == 'color_G' || command == 'color_B'){
-            if(!flag){
+        if (command == 'color_R' || command == 'color_G' || command == 'color_B') {
+            if (!flag) {
                 flag = true;
-                setTimeout(function (){
+                setTimeout(function () {
                     var r, g, b;
-                    adapter.getState('color_R', function (err, state){
-                        if (!err){
+                    adapter.getState('color_R', function (err, state) {
+                        if (!err) {
                             r = state.val;
-                            adapter.getState('color_G', function (err, state){
-                                if (!err){
+                            adapter.getState('color_G', function (err, state) {
+                                if (!err) {
                                     g = state.val;
-                                    adapter.getState('color_B', function (err, state){
-                                        if (!err){
+                                    adapter.getState('color_B', function (err, state) {
+                                        if (!err) {
                                             b = state.val;
-                                            if (state_current.ws2812fx_mode !== 0){
+                                            if (state_current.ws2812fx_mode !== 0) {
                                                 send('#' + rgbToHex(r, g, b));
                                             } else {
                                                 send('*' + rgbToHex(r, g, b));
@@ -70,25 +74,25 @@ adapter.on('stateChange', function (id, state) {
                 }, 1000);
             }
         }
-        if (command == 'color_RGB'){
+        if (command == 'color_RGB') {
             val = val.replace('#', '');
-            if(state_current.ws2812fx_mode !== 0){
+            if (state_current.ws2812fx_mode !== 0) {
                 send('#' + val);
             } else {
                 send('*' + val);
             }
         }
-        if (command == 'set_all_RGB'){
+        if (command == 'set_all_RGB') {
             val = val.replace('#', '');
             send('*' + val);
         }
-        if (command == 'single_RGB'){
+        if (command == 'single_RGB') {
             val = val.replace('#', '');
             send('!' + val);
         }
-        if (command == 'array_RGB'){
-            if(~val.indexOf('+')){
-                if(val[0] === '+'){
+        if (command == 'array_RGB') {
+            if (~val.indexOf('+')) {
+                if (val[0] === '+') {
                     send(val);
                 } else {
                     send('+' + val);
@@ -99,9 +103,9 @@ adapter.on('stateChange', function (id, state) {
                 send('+' + val);
             }
         }
-        if (command == 'rang_RGB'){
-            if(~val.indexOf('R')){
-                if(val[0] === 'R'){
+        if (command == 'rang_RGB') {
+            if (~val.indexOf('R')) {
+                if (val[0] === 'R') {
                     send(val);
                 } else {
                     send('R' + val);
@@ -112,18 +116,18 @@ adapter.on('stateChange', function (id, state) {
                 send('R' + val);
             }
         }
-        if (command == 'speed'){
-            if(val > 255) val = 255;
-            if(val < 0) val = 0;
+        if (command == 'speed') {
+            if (val > 255) val = 255;
+            if (val < 0) val = 0;
             send('?' + val);
         }
-        if (command == 'brightness'){
-            if(val > 255) val = 255;
-            if(val < 0) val = 0;
+        if (command == 'brightness') {
+            if (val > 255) val = 255;
+            if (val < 0) val = 0;
             send('%' + val);
         }
-        if(!flag){
-           send('$');
+        if (!flag) {
+            send('$');
         }
     }
 });
@@ -143,19 +147,26 @@ adapter.on('ready', function () {
     main();
 });
 
-var connect = function (){
+
+
+var connect = function () {
     var host = adapter.config.host ? adapter.config.host : '127.0.0.1';
     var port = adapter.config.port ? adapter.config.port : 81;
-    adapter.log.info('McLighting connect to: ' + host + ':' + port);
+    rgbw = adapter.config.rgbw;
+    if (rgbw) {
+        adapter.log.info('McLighting connect to: ' + host + ':' + port + ' with RGBW');
+    } else {
+        adapter.log.info('McLighting connect to: ' + host + ':' + port);
+    }
 
-    ws = new WebSocket('ws://' + host + ':' + port,{
-        perMessageDeflate : false
+    ws = new WebSocket('ws://' + host + ':' + port, {
+        perMessageDeflate: false
     });
 
     ws.on('open', function open() {
         adapter.log.info(ws.url + ' McLighting connected');
         send('$');
-        setTimeout(function (){
+        setTimeout(function () {
             send('~');
         }, 5000);
         pingTimer = setInterval(function () {
@@ -164,8 +175,7 @@ var connect = function (){
         timeoutTimer = setInterval(function () {
             if (!isAlive) {
                 ws.close();
-            }
-            else {
+            } else {
                 isAlive = false;
             }
         }, 60000);
@@ -174,7 +184,7 @@ var connect = function (){
     ws.on('message', function incoming(data) {
         adapter.log.debug('message - ' + data);
         isAlive = true;
-        if(data === 'Connected'){
+        if (data === 'Connected') {
             adapter.setState('info.connection', true, true);
         }
         parse(data);
@@ -191,28 +201,102 @@ var connect = function (){
         adapter.log.debug('McLighting reconnect after 10 seconds');
         setTimeout(connect, 10000);
     });
-    ws.on('pong', function(data) {
+    ws.on('pong', function (data) {
         isAlive = true;
         adapter.log.debug(ws.url + ' receive a pong : ' + data);
     });
 };
 
 function main() {
+    createStates();
     adapter.subscribeStates('*');
     connect();
 }
 
-function send(data){
-    ws.send(data, function ack(error) {
-            if(error){
-                adapter.log.error('Send command: {' + data + '}, ERROR - ' + error);
-                if (~error.toString().indexOf('CLOSED')){
-                    adapter.setState('info.connection', false, true);
-                    connect();
-                }
-            } else {
-                adapter.log.debug('Send command:{' + data + '}');
+function createStates() {
+    adapter.setObjectNotExists(rgbw ? "color_RGBW" : "color_RGB", {
+        type: "state",
+        common: {
+            role: "state",
+            name: "Set default color of the lamp",
+            type: "string",
+            read: true,
+            write: true,
+            def: false
+        }
+    });
+    adapter.setObjectNotExists(rgbw ? "set_all_RGBW" : "set_all_RGB", {
+        type: "state",
+        common: {
+            role: "state",
+            name: "Set default color of the lamp and light all LEDs in that color",
+            type: "string",
+            read: true,
+            write: true,
+            def: false
+        }
+    });
+    adapter.setObjectNotExists(rgbw ? "single_RGBW" : "single_RGB", {
+        type: "state",
+        common: {
+            role: "state",
+            name: "Light single LEDs in the given color",
+            type: "string",
+            read: true,
+            write: true,
+            def: false
+        }
+    });
+    adapter.setObjectNotExists(rgbw ? "array_RGBW" : "array_RGB", {
+        type: "state",
+        common: {
+            role: "state",
+            name: "Light multiple LEDs in the given colors",
+            type: "string",
+            read: true,
+            write: true,
+            def: false
+        }
+    });
+    adapter.setObjectNotExists(rgbw ? "range_RGBW" : "range_RGB", {
+        type: "state",
+        common: {
+            role: "state",
+            name: "Light multiple LED ranges in the given colors",
+            type: "string",
+            read: true,
+            write: true,
+            def: false
+        }
+    });
+    if (rgbw) {
+        adapter.setObjectNotExists("color_W", {
+            type: "state",
+            common: {
+                role: "state",
+                name: "Set default White of the lamp",
+                type: "number",
+                min: 0,
+                max: 255,
+                read: true,
+                write: true,
+                def: false
             }
+        });
+    }
+}
+
+function send(data) {
+    ws.send(data, function ack(error) {
+        if (error) {
+            adapter.log.error('Send command: {' + data + '}, ERROR - ' + error);
+            if (~error.toString().indexOf('CLOSED')) {
+                adapter.setState('info.connection', false, true);
+                connect();
+            }
+        } else {
+            adapter.log.debug('Send command:{' + data + '}');
+        }
     });
 }
 
