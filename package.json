@@ -6,12 +6,16 @@
     "name": "instalator",
     "email": "vvvalt@mail.ru"
   },
-  "contributors": [
-
-  ],
+  "contributors": [],
   "homepage": "https://github.com/instalator/ioBroker.mclighting",
   "license": "MIT",
-  "keywords": ["mclighting", "rgb", "light", "ws2812", "esp8266"],
+  "keywords": [
+    "mclighting",
+    "rgb",
+    "light",
+    "ws2812",
+    "esp8266"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/instalator/ioBroker.mclighting"
