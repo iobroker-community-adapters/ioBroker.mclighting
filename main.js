@@ -300,54 +300,75 @@ function send(data) {
     });
 }
 
-function parse(data){
+function parse(data) {
     var obj;
     try {
         obj = JSON.parse(data);
-            if(obj.mode && obj.brightness){
-                state_current = obj;
-                for (var key in obj) {
-                    if(obj.hasOwnProperty(key)){
-                        if(key === 'color'){
-                            setStates('color_RGB', rgbToHex(obj[key][0], obj[key][1], obj[key][2]));
+        adapter.log.info('data' + data);
+        if (obj.mode && obj.brightness) {
+            state_current = obj;
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    adapter.log.info('KEY' + key);
+                    adapter.log.info('VALUE' + obj[key]);
+                    if (key === 'color') {
+                        const length = obj[key].length;
+
+                        if (length >= 3) {
                             setStates('color_R', obj[key][0]);
                             setStates('color_G', obj[key][1]);
                             setStates('color_B', obj[key][2]);
+                            if (length >= 4 && rgbw) {
+                                setStates('color_W', obj[key][3]);
+                                setStates('color_RGBW', rgbwToHex(obj[key][0], obj[key][1], obj[key][2], obj[key][3]));
+                            } else {
+                                setStates('color_RGB', rgbwToHex(obj[key][0], obj[key][1], obj[key][2]));
+                            }
                         }
-                        setStates(key, obj[key]);
                     }
-                    if(key === 'ws2812fx_mode'){
-                        setStates('fx_mode', obj[key]);
-                    }
-                    if(key === 'ws2812fx_mode_name'){
-                        setStates('fx_mode_name', obj[key]);
-                    }
-
+                    setStates(key, obj[key]);
                 }
+                if (key === 'ws2812fx_mode') {
+                    setStates('fx_mode', obj[key]);
+                }
+                if (key === 'ws2812fx_mode_name') {
+                    setStates('fx_mode_name', obj[key]);
+                }
+
             }
-            if(typeof obj[0] === 'object'){
-                setStates('list_modes', obj);
-                list_modes = obj;
-            }
+        }
+        if (typeof obj[0] === 'object') {
+            setStates('list_modes', JSON.stringify(obj));
+            list_modes = obj;
+        }
     } catch (err) {
         adapter.log.debug('Error parse - ' + err);
     }
 }
 
-function setStates(name, val){
-    adapter.getState(name, function (err, state){
-        if ((err)){
-            adapter.log.warn('Send this data developers ' + name);
+function setStates(name, val) {
+    adapter.log.info("set state name: " + name + " val: " + val);
+    adapter.getState(name, function (err, state) {
+        if ((err)) {
+            adapter.log.warn('Send this data to developers ' + name);
         } else {
-            adapter.setState(name, {val: val, ack: true});
+            adapter.setState(name, {
+                val: val,
+                ack: true
+            });
         }
     });
 }
 
-function rgbToHex(r, g, b) {
-    return componentToHex(r) + componentToHex(g) + componentToHex(b);
+function rgbToHex(r, g, b, w) {
+    return componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(w);
 }
+
 function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
+    if (c) {
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    } else {
+        return '';
+    }
 }
