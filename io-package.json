@@ -3,6 +3,14 @@
         "name": "mclighting",
         "version": "0.0.10",
         "news": {
+            "0.0.11": {
+                "en": "support for RGBW Leds, fix typo",
+                "de": "support for RGBW Leds, fix typo",
+                "ru": "support for RGBW Leds, fix typo",
+                "pt": "support for RGBW Leds, fix typo",
+                "fr": "support for RGBW Leds, fix typo",
+                "nl": "support for RGBW Leds, fix typo"
+            },
             "0.0.10": {
                 "en": "fix error, added ping pong function for reconnect",
                 "de": "fix error, added ping pong function for reconnect",

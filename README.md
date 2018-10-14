@@ -14,6 +14,8 @@
 ## Description
 The driver allows you to control the RGB strip on the LEDs WS2811/WS2812 connected to the ESP8266 with firmware [McLighting](https://github.com/toblum/McLighting)
 
+If you want to use RGBW Leds (like SK6812) connected to the ESP8266, you should just this fork: [McLightingRGBW](https://github.com/FabLab-Luenen/McLighting) and select in the adapter config *RGBW*.
+
 ## Using
 
 ### brightness
@@ -37,11 +39,11 @@ Where <brightness> is the brightness as value 0-255.
 - theaterchase (Starts theaterchase effect in the given or previously set color.)
 - theaterchaseRainbow (Starts theaterchase effect with changing colors.)
 - tv (Starts TV simulator.)
-### array_RGB
+### array_RGB(W)
  Light multiple LEDs in the given colors.
  ```
- +[numled][hexrgb]+[numled][hexrgb]+[numled][hexrgb] [...] or 
- [numled][hexrgb],[numled][hexrgb],[numled][hexrgb],[...] 
+ +[numled][hexrgb(w)]+[numled][hexrgb(w)]+[numled][hexrgb(w)] [...] or 
+ [numled][hexrgb(w)],[numled][hexrgb(w)],[numled][hexrgb(w)],[...] 
  ```
  Where <numled> is the number of the led (starting with 00), e.g. 01.
  
@@ -51,19 +53,19 @@ Where <brightness> is the brightness as value 0-255.
 ### color
  Set default color of the lamp.
  
- Where <r,g,b> is the color as number (0 - 255), e.g. 32,3,200
+ Where <r,g,b(,w)> is the color as number (0 - 255), e.g. 32,3,200(, 255)
  
  If active mode 0 (Static) - Set default color of the lamp and light all LEDs in that color.
-### color_R, color_G, color_B
+### color_R, color_G, color_B(, color_W)
  Set default color of the lamp.
  
- Where <r(g)(b)> is the color as number (0 - 255), e.g. 154
+ Where <r(g)(b)(w)> is the color as number (0 - 255), e.g. 154
  
  If active mode 0 (Static) - Set default color of the lamp and light all LEDs in that color.
-### color_RGB
+### color_RGB(W)
  Set default color of the lamp.
  
- Where <hexrgb> is the color as HEX, e.g. 04d2ff
+ Where <hexrgb(w)> is the color as HEX, e.g. 04d2ff
  
  If active mode 0 (Static) - Set default color of the lamp and light all LEDs in that color.
 ### list_modes
@@ -86,31 +88,31 @@ Where <brightness> is the brightness as value 0-255.
   ...
 ]
  ```
-### rang_RGB
+### range_RGB(W)
  Light multiple LED ranges in the given colors.
  ```
- R[rangstart_led][rangend_led][hexrgb]R[rangstart_led][rangend_led][hexrgb]R[rangstart_led][rangend_led][hexrgb] [...] or
- [rangstart_led][rangend_led][hexrgb],[rangstart_led][rangend_led][hexrgb],[rangstart_led][rangend_led][hexrgb],[...] 
+ R[rangestart_led][rangeend_led][hexrgb(w)]R[rangestart_led][rangeend_led][hexrgb(w)]R[rangestart_led][rangeend_led][hexrgb(w)] [...] or
+ [rangestart_led][rangeend_led][hexrgb(w)],[rangestart_led][rangeend_led][hexrgb(w)],[rangestart_led][rangeend_led][hexrgb(w)],[...] 
  ```
- Where <rangstart_led> is the start number of the range (numbers starting with 00), e.g. 00. 
+ Where <rangestart_led> is the start number of the range (numbers starting with 00), e.g. 00. 
  
- Where <rangend_led> is the end number of the range (numbers starting with 00), e.g. 09.
+ Where <rangeend_led> is the end number of the range (numbers starting with 00), e.g. 09.
  
- Where <hexrgb> is the color as HEX, e.g. 04d2ff.
+ Where <hexrgb(w)> is the color as HEX, e.g. 04d2ff.
  
  Can be repeated multiple times. 
  
  Example: R0009ffffffR1019ff0000 OR 0009ffffff,1019ff0000 lights the first 10 LEDs white and the next 10 red
-### set_all_RGB
+### set_all_RGB(W)
  Set default color of the lamp and light all LEDs in that color.
  
- Where <hexrgb> is the color as HEX, e.g. 04d2ff
-### single_RGB
+ Where <hexrgb(w)> is the color as HEX, e.g. 04d2ff
+### single_RGB(W)
  Light single LEDs in the given color.
  
  Where <numled> is the number of the led (starting with 00), e.g. 01.
  
- Where <hexrgb> is the color as HEX, e.g. 04d2ff.
+ Where <hexrgb(w)> is the color as HEX, e.g. 04d2ff.
 ### fx_mode
  Set animation mode.
  
@@ -119,6 +121,10 @@ Where <brightness> is the brightness as value 0-255.
  Current name fx_mode
   
 ## Changelog
+
+### 0.0.11 (2018-10-14)
+* Add support for RGBW Leds ([McLightingRGBW](https://github.com/FabLab-Luenen/McLighting))
+* Fix typo for state *rang_RGB* to *range_RGB* !
 
 ### 0.0.10 (2018-04-02)
 * (instalator) fix error, added ping pong function for reconnect

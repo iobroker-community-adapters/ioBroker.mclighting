@@ -1,6 +1,6 @@
 {
   "name": "iobroker.mclighting",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "ioBroker McLighting Adapter",
   "author": {
     "name": "instalator",
@@ -12,9 +12,11 @@
   "keywords": [
     "mclighting",
     "rgb",
+    "rgbw",
     "light",
     "ws2812",
-    "esp8266"
+    "esp8266",
+    "sk6812"
   ],
   "repository": {
     "type": "git",
