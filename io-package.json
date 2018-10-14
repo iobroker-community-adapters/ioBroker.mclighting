@@ -251,6 +251,18 @@
                 "def": false
             },
             "native": {}
+        }, {
+            "_id": "power",
+            "type": "state",
+            "common": {
+                "role": "switch.light",
+                "name": "Turn On/Off",
+                "type": "boolean",
+                "read": true,
+                "write": true,
+                "def": false
+            },
+            "native": {}
         }
     ]
 }

@@ -34,6 +34,13 @@ adapter.on('stateChange', function (id, state) {
         var name = ids[ids.length - 2].toString();
         var command = ids[ids.length - 1].toString();
         var val = state.val;
+        if (command == 'power') {
+            if (val) {
+                send('%' + 255);
+            } else {
+                send('%' + 0);
+            }
+        }
         if (command == 'mode') {
             send('=' + val);
         }
@@ -48,9 +55,9 @@ adapter.on('stateChange', function (id, state) {
                 var b = c[2] || 0;
                 if (c.length >= 4 && rgbw) {
                     var w = c[3] || 0;
-                    send(sendChar + rgbToHex(parseInt(r), parseInt(g), parseInt(b), parseInt(w)));
+                    send(sendChar + rgbwToHex(parseInt(r), parseInt(g), parseInt(b), parseInt(w)));
                 } else {
-                    send(sendChar + rgbToHex(parseInt(r), parseInt(g), parseInt(b)));
+                    send(sendChar + rgbwToHex(parseInt(r), parseInt(g), parseInt(b)));
                 }
             }
         }
@@ -72,12 +79,12 @@ adapter.on('stateChange', function (id, state) {
                                                 adapter.getState('color_W', function (err, state_w) {
                                                     if (!err) {
                                                         w = state_w !== null ? state_w.val : 0;
-                                                        send(sendChar + rgbToHex(r, g, b, w));
+                                                        send(sendChar + rgbwToHex(r, g, b, w));
                                                         send('$');
                                                     }
                                                 });
                                             } else {
-                                                send(sendChar + rgbToHex(r, g, b));
+                                                send(sendChar + rgbwToHex(r, g, b));
                                                 send('$');
                                             }
                                         }
@@ -92,41 +99,58 @@ adapter.on('stateChange', function (id, state) {
         }
         if (command == (rgbw ? 'color_RGBW' : 'color_RGB')) {
             val = val.replace('#', '');
+            if (rgbw) {
+                val = val.slice(6, 8) + val.slice(0, 6);
+            }
             send(sendChar + val);
         }
         if (command == (rgbw ? 'set_all_RGBW' : 'set_all_RGB')) {
             val = val.replace('#', '');
+            if (rgbw) {
+                val = val.slice(6, 8) + val.slice(0, 6);
+            }
             send('*' + val);
         }
         if (command == (rgbw ? 'single_RGBW' : 'single_RGB')) {
             val = val.replace('#', '');
+            if (rgbw) {
+                val = val.slice(0, 2) + val.slice(8, 10) + val.slice(2, 8);
+            }
             send('!' + val);
         }
         if (command == (rgbw ? 'array_RGBW' : 'array_RGB')) {
             if (~val.indexOf('+')) {
-                if (val[0] === '+') {
-                    send(val);
-                } else {
-                    send('+' + val);
+                if (val[0] !== '+') {
+                    val = '+' + val;
                 }
             } else {
-                val = val.replace(/\s/g, '').replace(',', '+').replace('[', '').replace(']', '');
+                val = '+' + val.replace(/\s/g, '').replace(',', '+').replace('[', '').replace(']', '');
                 adapter.log.debug('Send ' + command + ': ' + val);
-                send('+' + val);
             }
+            if (rgbw) {
+                for (var i = 0; i < val.length; i = i + 11) {
+                    const part = val.slice(i, i + 3) + val.slice(i + 9, i + 11) + val.slice(i + 3, i + 9);
+                    val = val.slice(0, i) + part + val.slice(i + 11, val.length)
+                }
+            }
+            send(val);
         }
         if (command == (rgbw ? 'range_RGBW' : 'range_RGB')) {
             if (~val.indexOf('R')) {
-                if (val[0] === 'R') {
-                    send(val);
-                } else {
-                    send('R' + val);
+                if (val[0] !== 'R') {
+                    val = 'R' + val;
                 }
             } else {
-                val = val.replace(/\s/g, '').replace(',', 'R').replace('[', '').replace(']', '');
+                val = 'R' + val.replace(/\s/g, '').replace(',', 'R').replace('[', '').replace(']', '');
                 adapter.log.debug('Send ' + command + ': ' + val);
-                send('R' + val);
             }
+            if (rgbw) {
+                for (var i = 0; i < val.length; i = i + 13) {
+                    const part = val.slice(i, i + 5) + val.slice(i + 11, i + 13) + val.slice(i + 5, i + 11);
+                    val = val.slice(0, i) + part + val.slice(i + 13, val.length)
+                }
+            }
+            send(val);
         }
         if (command == 'speed') {
             if (val > 255) val = 255;
@@ -322,18 +346,22 @@ function parse(data) {
                         const length = obj[key].length;
 
                         if (length >= 3) {
-                            setStates('color_R', obj[key][0]);
-                            setStates('color_G', obj[key][1]);
-                            setStates('color_B', obj[key][2]);
+                            setStates('color_R', obj[key][0 + (rgbw ? 1 : 0)]);
+                            setStates('color_G', obj[key][1 + (rgbw ? 1 : 0)]);
+                            setStates('color_B', obj[key][2 + (rgbw ? 1 : 0)]);
                             if (length >= 4 && rgbw) {
-                                setStates('color_W', obj[key][3]);
-                                setStates('color_RGBW', rgbwToHex(obj[key][0], obj[key][1], obj[key][2], obj[key][3]));
+                                setStates('color_W', obj[key][0]);
+                                const hex = rgbwToHex(obj[key][2], obj[key][3], obj[key][0], obj[key][1]);
+                                setStates('color_RGBW', hex);
+                                setStates('color', obj[key][1] + ',' + obj[key][2] + ',' + obj[key][3] + ',' + obj[key][0]);
                             } else {
                                 setStates('color_RGB', rgbwToHex(obj[key][0], obj[key][1], obj[key][2]));
+                                setStates('color', obj[key][0] + ',' + obj[key][1] + ',' + obj[key][2]);
                             }
                         }
+                    } else {
+                        setStates(key, obj[key]);
                     }
-                    setStates(key, obj[key]);
                 }
                 if (key === 'ws2812fx_mode') {
                     setStates('fx_mode', obj[key]);
@@ -367,8 +395,8 @@ function setStates(name, val) {
     });
 }
 
-function rgbToHex(r, g, b, w) {
-    return componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(w);
+function rgbwToHex(r, g, b, w) {
+    return componentToHex(w) + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 function componentToHex(c) {
