@@ -25,7 +25,7 @@ adapter.on('objectChange', function (id, obj) {
 // is called if a subscribed state changes
 adapter.on('stateChange', function (id, state) {
     if (state && !state.ack) {
-        adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
+        adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
         var sendChar = '*';
         if (state_current.ws2812fx_mode !== 0) {
             sendChar = '#';
@@ -59,19 +59,19 @@ adapter.on('stateChange', function (id, state) {
                 flag = true;
                 setTimeout(function () {
                     var r, g, b, w;
-                    adapter.getState('color_R', function (err, state) {
+                    adapter.getState('color_R', function (err, state_r) {
                         if (!err) {
-                            r = state.val;
-                            adapter.getState('color_G', function (err, state) {
+                            r = state_r !== null ? state_r.val : 0;
+                            adapter.getState('color_G', function (err, state_g) {
                                 if (!err) {
-                                    g = state.val;
-                                    adapter.getState('color_B', function (err, state) {
+                                    g = state_g !== null ? state_g.val : 0;
+                                    adapter.getState('color_B', function (err, state_b) {
                                         if (!err) {
-                                            b = state.val;
+                                            b = state_b !== null ? state_b.val : 0;
                                             if (rgbw) {
-                                                adapter.getState('color_W', function (err, state) {
+                                                adapter.getState('color_W', function (err, state_w) {
                                                     if (!err) {
-                                                        w = state.val;
+                                                        w = state_w !== null ? state_w.val : 0;
                                                         send(sendChar + rgbToHex(r, g, b, w));
                                                         send('$');
                                                     }
@@ -90,19 +90,19 @@ adapter.on('stateChange', function (id, state) {
                 }, 1000);
             }
         }
-        if (command == rgbw ? 'color_RGBW' : 'color_RGB') {
+        if (command == (rgbw ? 'color_RGBW' : 'color_RGB')) {
             val = val.replace('#', '');
             send(sendChar + val);
         }
-        if (command == rgbw ? 'set_all_RGBW' : 'set_all_RGB') {
+        if (command == (rgbw ? 'set_all_RGBW' : 'set_all_RGB')) {
             val = val.replace('#', '');
             send('*' + val);
         }
-        if (command == rgbw ? 'single_RGBW' : 'single_RGB') {
+        if (command == (rgbw ? 'single_RGBW' : 'single_RGB')) {
             val = val.replace('#', '');
             send('!' + val);
         }
-        if (command == rgbw ? 'array_RGBW' : 'array_RGB') {
+        if (command == (rgbw ? 'array_RGBW' : 'array_RGB')) {
             if (~val.indexOf('+')) {
                 if (val[0] === '+') {
                     send(val);
@@ -115,7 +115,7 @@ adapter.on('stateChange', function (id, state) {
                 send('+' + val);
             }
         }
-        if (command == rgbw ? 'range_RGBW' : 'range_RGB') {
+        if (command == (rgbw ? 'range_RGBW' : 'range_RGB')) {
             if (~val.indexOf('R')) {
                 if (val[0] === 'R') {
                     send(val);
@@ -162,7 +162,6 @@ adapter.on('ready', function () {
 var connect = function () {
     var host = adapter.config.host ? adapter.config.host : '127.0.0.1';
     var port = adapter.config.port ? adapter.config.port : 81;
-    rgbw = adapter.config.rgbw;
     if (rgbw) {
         adapter.log.info('McLighting connect to: ' + host + ':' + port + ' with RGBW');
     } else {
@@ -224,6 +223,7 @@ function main() {
 }
 
 function createStates() {
+    rgbw = adapter.config.rgbw;
     adapter.setObjectNotExists(rgbw ? "color_RGBW" : "color_RGB", {
         type: "state",
         common: {
@@ -314,13 +314,10 @@ function parse(data) {
     var obj;
     try {
         obj = JSON.parse(data);
-        adapter.log.info('data' + data);
         if (obj.mode && obj.brightness) {
             state_current = obj;
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    adapter.log.info('KEY' + key);
-                    adapter.log.info('VALUE' + obj[key]);
                     if (key === 'color') {
                         const length = obj[key].length;
 
@@ -357,7 +354,7 @@ function parse(data) {
 }
 
 function setStates(name, val) {
-    adapter.log.info("set state name: " + name + " val: " + val);
+    adapter.log.debug("set state name: " + name + " val: " + val);
     adapter.getState(name, function (err, state) {
         if ((err)) {
             adapter.log.warn('Send this data to developers ' + name);
@@ -375,7 +372,7 @@ function rgbToHex(r, g, b, w) {
 }
 
 function componentToHex(c) {
-    if (c) {
+    if (c !== null) {
         var hex = c.toString(16);
         return hex.length == 1 ? "0" + hex : hex;
     } else {
