@@ -3,6 +3,14 @@
         "name": "mclighting",
         "version": "0.0.10",
         "news": {
+            "0.0.11": {
+                "en": "support for RGBW Leds, fix typo",
+                "de": "support for RGBW Leds, fix typo",
+                "ru": "support for RGBW Leds, fix typo",
+                "pt": "support for RGBW Leds, fix typo",
+                "fr": "support for RGBW Leds, fix typo",
+                "nl": "support for RGBW Leds, fix typo"
+            },
             "0.0.10": {
                 "en": "fix error, added ping pong function for reconnect",
                 "de": "fix error, added ping pong function for reconnect",
@@ -44,7 +52,7 @@
                 "nl": "Eerste release"
             }
         },
-		"title": "McLighting adapter",
+        "title": "McLighting adapter",
         "titleLang": {
             "en": "McLighting adapter",
             "de": "McLighting Vorlagenadapter",
@@ -90,13 +98,11 @@
         "type": "lighting"
     },
     "native": {
-        "host" : "127.0.0.1",
-        "port" : 81
+        "host": "127.0.0.1",
+        "port": 81
     },
-    "objects": [
-    ],
-    "instanceObjects": [
-        {
+    "objects": [],
+    "instanceObjects": [{
             "_id": "info.connection",
             "type": "state",
             "common": {
@@ -107,8 +113,7 @@
                 "write": false,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "mode",
@@ -121,8 +126,7 @@
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "fx_mode",
@@ -135,8 +139,7 @@
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "fx_mode_name",
@@ -149,8 +152,7 @@
                 "write": false,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "speed",
@@ -160,13 +162,12 @@
                 "name": "Set speed",
                 "type": "number",
                 "min": 0,
-                "max":255,
+                "max": 255,
                 "read": true,
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "brightness",
@@ -176,13 +177,12 @@
                 "name": "Set brightness",
                 "type": "number",
                 "min": 0,
-                "max":255,
+                "max": 255,
                 "read": true,
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "color",
@@ -195,78 +195,7 @@
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
-        },
-        {
-            "_id": "color_RGB",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "Set default color of the lamp",
-                "type": "string",
-                "read": true,
-                "write": true,
-                "def": false
-            },
-            "native": {
-            }
-        },
-        {
-            "_id": "set_all_RGB",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "Set default color of the lamp and light all LEDs in that color",
-                "type": "string",
-                "read": true,
-                "write": true,
-                "def": false
-            },
-            "native": {
-            }
-        },
-        {
-            "_id": "single_RGB",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "Light single LEDs in the given color",
-                "type": "string",
-                "read": true,
-                "write": true,
-                "def": false
-            },
-            "native": {
-            }
-        },
-        {
-            "_id": "array_RGB",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "Light multiple LEDs in the given colors",
-                "type": "string",
-                "read": true,
-                "write": true,
-                "def": false
-            },
-            "native": {
-            }
-        },
-        {
-            "_id": "rang_RGB",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "Light multiple LED ranges in the given colors",
-                "type": "string",
-                "read": true,
-                "write": true,
-                "def": false
-            },
-            "native": {
-            }
+            "native": {}
         },
         {
             "_id": "color_R",
@@ -276,15 +205,13 @@
                 "name": "Set default Red color of the lamp",
                 "type": "number",
                 "min": 0,
-                "max":255,
+                "max": 255,
                 "read": true,
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
-        },
-        {
+            "native": {}
+        }, {
             "_id": "color_G",
             "type": "state",
             "common": {
@@ -292,15 +219,13 @@
                 "name": "Set default Green color of the lamp",
                 "type": "number",
                 "min": 0,
-                "max":255,
+                "max": 255,
                 "read": true,
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
-        },
-        {
+            "native": {}
+        }, {
             "_id": "color_B",
             "type": "state",
             "common": {
@@ -308,15 +233,13 @@
                 "name": "Set default Blue color of the lamp",
                 "type": "number",
                 "min": 0,
-                "max":255,
+                "max": 255,
                 "read": true,
                 "write": true,
                 "def": false
             },
-            "native": {
-            }
-        },
-        {
+            "native": {}
+        }, {
             "_id": "list_modes",
             "type": "state",
             "common": {
@@ -327,8 +250,19 @@
                 "write": false,
                 "def": false
             },
-            "native": {
-            }
+            "native": {}
+        }, {
+            "_id": "power",
+            "type": "state",
+            "common": {
+                "role": "switch.light",
+                "name": "Turn On/Off",
+                "type": "boolean",
+                "read": true,
+                "write": true,
+                "def": false
+            },
+            "native": {}
         }
     ]
 }
