@@ -400,7 +400,7 @@ function rgbwToHex(r, g, b, w) {
 }
 
 function componentToHex(c) {
-    if (c !== null) {
+    if (c !== null && c !== undefined) {
         var hex = c.toString(16);
         return hex.length == 1 ? "0" + hex : hex;
     } else {
