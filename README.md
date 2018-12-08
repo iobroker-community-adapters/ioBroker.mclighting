@@ -122,6 +122,9 @@ Where <brightness> is the brightness as value 0-255.
   
 ## Changelog
 
+### 0.0.12 (2018-12-09)
+* (instalator) fix error
+
 ### 0.0.11 (2018-10-14)
 * (Johannes Jaeger) Add support for RGBW Leds ([McLightingRGBW](https://github.com/FabLab-Luenen/McLighting))
 * (Johannes Jaeger) Fix typo for state *rang_RGB* to *range_RGB* !
