@@ -11,6 +11,8 @@
 ## Описание
 Драйвер позволяет управлять RGB лентой на светодиодах WS2811/WS2812 подключенной к ESP8266 с прошивкой [McLighting](https://github.com/toblum/McLighting)
 
+Если вы хотите использовать RGBW-светодиоды (например, SK6812), подключенные к ESP8266, вам нужна вот эта доработанная прошивка: [McLightingRGBW](https://github.com/FabLab-Luenen/McLighting) и в настройках драйвера выбрать RGBW.
+
 ## Description
 The driver allows you to control the RGB strip on the LEDs WS2811/WS2812 connected to the ESP8266 with firmware [McLighting](https://github.com/toblum/McLighting)
 
