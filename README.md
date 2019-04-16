@@ -2,7 +2,7 @@
 # ioBroker McLighting adapter
 =================
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.mclighting.svg)](https://www.npmjs.com/package/iobroker.mclighting)
+![Number of Installations](http://iobroker.live/badges/mclighting-installed.svg) ![Number of Installations](http://iobroker.live/badges/mclighting-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.mclighting.svg)](https://www.npmjs.com/package/iobroker.mclighting)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.mclighting.svg)](https://www.npmjs.com/package/iobroker.mclighting)
 [![Tests](http://img.shields.io/travis/instalator/ioBroker.mclighting/master.svg)](https://travis-ci.org/instalator/ioBroker.mclighting)
 
