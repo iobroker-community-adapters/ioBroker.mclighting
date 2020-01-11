@@ -1,5 +1,5 @@
 'use strict';
-var utils = require(__dirname + '/lib/utils');
+var utils = require('@iobroker/adapter-core');
 var adapter = new utils.Adapter('mclighting');
 const WebSocket = require('ws');
 var ws, state_current = {},

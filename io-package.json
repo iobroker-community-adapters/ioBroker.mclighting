@@ -60,7 +60,7 @@
                 "nl": "Eerste release"
             }
         },
-        "title": "McLighting adapter",
+        "title": "McLighting",
         "titleLang": {
             "en": "McLighting adapter",
             "de": "McLighting Vorlagenadapter",
@@ -84,6 +84,17 @@
         "authors": [
             "instalator <vvvalt@mail.ru>"
         ],
+        "docs": {
+            "en": "docs/en/admin.md",
+            "ru": "docs/ru/admin.md",
+            "de": "docs/de/admin.md",
+            "es": "docs/es/admin.md",
+            "it": "docs/it/admin.md",
+            "fr": "docs/fr/admin.md",
+            "nl": "docs/nl/admin.md",
+            "pt": "docs/pt/admin.md"
+        },
+        "license": "MIT",
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "mclighting.png",
