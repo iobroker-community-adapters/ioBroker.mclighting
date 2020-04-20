@@ -2,7 +2,7 @@
 const utils = require('@iobroker/adapter-core');
 const WebSocket = require('ws');
 
-let adapter, pingTimer, timeoutTimer, rgbw, isAlive = false, flag = false, list_modes = null, mclighting, state_current = {};
+let adapter, pingTimer, timeoutTimer, rgbw, isAlive = false, flag = false, list_modes = null, mclighting, state_current = {}, timeOutRGB, timeOutSend, timeOutReconnect;
 
 function startAdapter(options){
     return adapter = utils.adapter(Object.assign({}, options, {
@@ -15,6 +15,9 @@ function startAdapter(options){
                 mclighting && mclighting.close();
                 pingTimer && clearInterval(pingTimer);
                 timeoutTimer && clearInterval(timeoutTimer);
+                timeOutRGB && clearInterval(timeOutRGB);
+                timeOutSend && clearInterval(timeOutSend);
+                timeOutReconnect && clearInterval(timeOutReconnect);
                 callback();
             } catch (e) {
                 callback();
@@ -61,7 +64,7 @@ function startAdapter(options){
                 if (command === 'color_R' || command === 'color_G' || command === 'color_B' || command === 'color_W'){
                     if (!flag){
                         flag = true;
-                        setTimeout( ()=>{
+                        timeOutRGB = setTimeout( ()=>{
                             let r, g, b, w;
                             adapter.getState('color_R',  (err, state_r)=>{
                                 if (!err){
@@ -180,7 +183,7 @@ let connect = ()=>{
     mclighting.on('open', () => {
         adapter.log.info(mclighting.url + ' McLighting connected');
         send('$');
-        setTimeout(() => {
+        timeOutSend = setTimeout(() => {
             send('~');
         }, 5000);
         pingTimer = setInterval( ()=>{
@@ -219,7 +222,7 @@ let connect = ()=>{
         adapter.log.debug('ERROR! WS CLOSE, CODE - ' + e);
         adapter.log.debug('McLighting reconnect after 10 seconds');
         adapter.setState('info.connection', false, true);
-        setTimeout(connect, 10000);
+        timeOutReconnect = setTimeout(connect, 10000);
     });
 };
 
