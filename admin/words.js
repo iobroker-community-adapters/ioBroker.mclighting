@@ -3,12 +3,52 @@
 'use strict';
 
 systemDictionary = {
-    "Auto": {                                        "en": "Auto",                                            "de": "Auto",                                            "ru": "Автоматически",                                   "pt": "Auto",                                            "nl": "Auto",                                            "fr": "Auto",                                            "it": "Auto",                                            "es": "Auto"},
-    "Manual": {                                      "en": "Manual",                                          "de": "Manual",                                          "ru": "Вручную",                                         "pt": "Manual",                                          "nl": "Met de hand",                                     "fr": "Manuel",                                          "it": "Manuale",                                         "es": "Manual"},
-    "My select": {                                   "en": "My select",                                       "de": "Mein Auswahl",                                    "ru": "Выбор",                                           "pt": "Meu selecionado",                                 "nl": "Mijn select",                                     "fr": "Mon choix",                                       "it": "La mia selezione",                                "es": "Mi seleccion"},
-    "on save adapter restarts with new config immediately": {"en": "on save adapter restarts with new config immediately", "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.", "ru": "При сохранении настроек адаптера он сразу же перезапускается", "pt": "no adaptador de salvar reinicia com nova configuração imediatamente", "nl": "on save-adapter wordt onmiddellijk opnieuw opgestart met nieuwe config", "fr": "sur l'adaptateur de sauvegarde redémarre avec la nouvelle config immédiatement", "it": "su save adapter si riavvia immediatamente con la nuova configurazione", "es": "en el adaptador de guardar se reinicia con nueva configuración de inmediato"},
-    "host_ip": {"en": "ip address your ESP", "de": "ip address your ESP", "ru": "ip адрес вашего ESP", "pt": "ip address your ESP", "nl": "ip address your ESP", "fr": "ip address your ESP", "it": "ip address your ESP", "es": "ip address your ESP"},
-    'port_': {"en": "used port your ESP","de": "used port your ESP","ru": "использующийся порт вашей ESP", "pt": "used port your ESP", "nl": "used port your ESP", "fr": "used port your ESP","it": "used port your ESP","es": "used port your ESP"},
-    'host': {"en": "Нost","de": "Нost","ru": "Хост", "pt": "Нost", "nl": "Нost", "fr": "Нost","it": "Нost","es": "Нost"},
-    "port": {"en": "Port","de": "Port","ru": "Порт","pt": "Port","nl": "Port","fr": "Port","it": "Port","es": "Port"}
+    "host_ip":                                              {
+        "en": "ip address ESP",
+        "de": "IP-Adresse ESP",
+        "ru": "IP-адрес ESP",
+        "pt": "endereço IP ESP",
+        "nl": "ip adres ESP",
+        "fr": "adresse IP ESP",
+        "it": "indirizzo IP ESP",
+        "es": "dirección IP ESP",
+        "pl": "adres IP ESP",
+        "zh-cn": "IP地址ESP"
+    },
+    'port_':                                                {
+        "en": "WebSocket Api port your ESP (default 81)",
+        "de": "WebSocket API portieren Sie Ihr ESP (Standard 81)",
+        "ru": "Порт WebSocket API (по умолчанию 81)",
+        "pt": "A porta WebSocket Api do seu ESP (padrão 81)",
+        "nl": "WebSocket Api-poort uw ESP (standaard 81)",
+        "fr": "WebSocket Api port votre ESP (par défaut 81)",
+        "it": "WebSocket Api porta il tuo ESP (impostazione predefinita 81)",
+        "es": "WebSocket Api puerto su ESP (predeterminado 81)",
+        "pl": "WebSocket Api port ESP (domyślnie 81)",
+        "zh-cn": "WebSocket Api端口您的ESP（默认81）"
+    },
+    'host':                                                 {
+        "en": "IP address",
+        "de": "IP Adresse",
+        "ru": "IP адрес",
+        "pt": "endereço de IP",
+        "nl": "IP adres",
+        "fr": "adresse IP",
+        "it": "indirizzo IP",
+        "es": "dirección IP",
+        "pl": "adres IP",
+        "zh-cn": "IP地址"
+    },
+    "port":                                                 {
+        "en": "Port",
+        "de": "Hafen",
+        "ru": "Порт",
+        "pt": "Porta",
+        "nl": "Haven",
+        "fr": "Port",
+        "it": "Porta",
+        "es": "Puerto",
+        "pl": "Port",
+        "zh-cn": "港口"
+    }
 };

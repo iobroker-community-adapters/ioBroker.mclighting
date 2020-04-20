@@ -4,12 +4,16 @@
     "version": "0.1.0",
     "news": {
       "0.1.0": {
-        "en": "fix error",
-        "de": "fix error",
-        "ru": "fix error",
-        "pt": "fix error",
-        "fr": "fix error",
-        "nl": "fix error"
+        "en": "frefactoring\nadded compact mode",
+        "de": "frefactoring\nadded compact mode",
+        "ru": "frefactoring\nadded compact mode",
+        "pt": "frefactoring\nadded compact mode",
+        "nl": "frefactoring\nadded compact mode",
+        "fr": "frefactoring\nadded compact mode",
+        "it": "frefactoring\nadded compact mode",
+        "es": "frefactoring\nadded compact mode",
+        "pl": "frefactoring\nadded compact mode",
+        "zh-cn": "frefactoring\nadded compact mode"
       },
       "0.0.12": {
         "en": "fix error",
@@ -60,6 +64,7 @@
       "esp8266"
     ],
     "readme": "https://github.com/instalator/ioBroker.mclighting/blob/master/README.md",
+    "localLink": "%web_protocol%://%native_host%:80",
     "loglevel": "info",
     "type": "lighting"
   },
