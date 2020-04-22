@@ -15,9 +15,9 @@ function startAdapter(options){
                 mclighting && mclighting.close();
                 pingTimer && clearInterval(pingTimer);
                 timeoutTimer && clearInterval(timeoutTimer);
-                timeOutRGB && clearInterval(timeOutRGB);
-                timeOutSend && clearInterval(timeOutSend);
-                timeOutReconnect && clearInterval(timeOutReconnect);
+                timeOutRGB && clearTimeout(timeOutRGB);
+                timeOutSend && clearTimeout(timeOutSend);
+                timeOutReconnect && clearTimeout(timeOutReconnect);
                 callback();
             } catch (e) {
                 callback();
@@ -64,8 +64,9 @@ function startAdapter(options){
                 if (command === 'color_R' || command === 'color_G' || command === 'color_B' || command === 'color_W'){
                     if (!flag){
                         flag = true;
-                        timeOutRGB = setTimeout( ()=>{
+                        timeOutRGB = setTimeout( ()=> {
                             let r, g, b, w;
+                            timeOutRGB = null;
                             adapter.getState('color_R',  (err, state_r)=>{
                                 if (!err){
                                     r = state_r !== null ? state_r.val :0;
@@ -184,6 +185,7 @@ let connect = ()=>{
         adapter.log.info(mclighting.url + ' McLighting connected');
         send('$');
         timeOutSend = setTimeout(() => {
+            timeOutSend = null;
             send('~');
         }, 5000);
         pingTimer = setInterval( ()=>{
@@ -222,7 +224,10 @@ let connect = ()=>{
         adapter.log.debug('ERROR! WS CLOSE, CODE - ' + e);
         adapter.log.debug('McLighting reconnect after 10 seconds');
         adapter.setState('info.connection', false, true);
-        timeOutReconnect = setTimeout(connect, 10000);
+        timeOutReconnect = setTimeout(() => {
+            timeOutReconnect = null; 
+            connect();
+        }, 10000);
     });
 };
 
