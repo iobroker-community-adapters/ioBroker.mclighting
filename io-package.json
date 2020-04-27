@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "mclighting",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "Fix clear timeouts",
+        "de": "Fix clear timeouts",
+        "ru": "Fix clear timeouts",
+        "pt": "Fix clear timeouts",
+        "nl": "Fix clear timeouts",
+        "fr": "Fix clear timeouts",
+        "it": "Fix clear timeouts",
+        "es": "Fix clear timeouts",
+        "pl": "Fix clear timeouts",
+        "zh-cn": "Fix clear timeouts"
+      },
       "0.1.0": {
         "en": "frefactoring\nadded compact mode",
         "de": "frefactoring\nadded compact mode",
