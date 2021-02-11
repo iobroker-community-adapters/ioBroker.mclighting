@@ -327,23 +327,23 @@ function createStates(){
     adapter.setObjectNotExists(rgbw ? "color_RGBW" :"color_RGB", {
         type:   "state",
         common: {
-            role:  "state",
+            role:  "level.color.rgb",
             name:  "Set default color of the lamp",
             type:  "string",
             read:  true,
             write: true,
-            def:   false
+            def:   ""
         }
     });
     adapter.setObjectNotExists(rgbw ? "set_all_RGBW" :"set_all_RGB", {
         type:   "state",
         common: {
-            role:  "state",
+            role:  "level.color.rgb",
             name:  "Set default color of the lamp and light all LEDs in that color",
             type:  "string",
             read:  true,
             write: true,
-            def:   false
+            def:   ""
         }
     });
     adapter.setObjectNotExists(rgbw ? "single_RGBW" :"single_RGB", {
@@ -354,7 +354,7 @@ function createStates(){
             type:  "string",
             read:  true,
             write: true,
-            def:   false
+            def:   ""
         }
     });
     adapter.setObjectNotExists(rgbw ? "array_RGBW" :"array_RGB", {
@@ -365,7 +365,7 @@ function createStates(){
             type:  "string",
             read:  true,
             write: true,
-            def:   false
+            def:   ""
         }
     });
     adapter.setObjectNotExists(rgbw ? "range_RGBW" :"range_RGB", {
@@ -376,21 +376,20 @@ function createStates(){
             type:  "string",
             read:  true,
             write: true,
-            def:   false
+            def:   ""
         }
     });
     if (rgbw){
         adapter.setObjectNotExists("color_W", {
             type:   "state",
             common: {
-                role:  "state",
+                role:  "level.color.white",
                 name:  "Set default White of the lamp",
                 type:  "number",
                 min:   0,
                 max:   255,
                 read:  true,
-                write: true,
-                def:   false
+                write: true
             }
         });
     }

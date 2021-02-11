@@ -128,7 +128,7 @@ Where <brightness> is the brightness as value 0-255.
 ## Changelog
 
 ### 0.1.2
-* (instalator) 
+* (instalator) change role
 
 ### 0.1.1
 * (Bluefox) Fix clear timeouts

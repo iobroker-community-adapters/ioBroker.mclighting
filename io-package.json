@@ -4,16 +4,16 @@
     "version": "0.1.2",
     "news": {
       "0.1.2": {
-        "en": "Fix clear timeouts",
-        "de": "Fix clear timeouts",
-        "ru": "Fix clear timeouts",
-        "pt": "Fix clear timeouts",
-        "nl": "Fix clear timeouts",
-        "fr": "Fix clear timeouts",
-        "it": "Fix clear timeouts",
-        "es": "Fix clear timeouts",
-        "pl": "Fix clear timeouts",
-        "zh-cn": "Fix clear timeouts"
+        "en": "change role",
+        "de": "change role",
+        "ru": "change role",
+        "pt": "change role",
+        "nl": "change role",
+        "fr": "change role",
+        "it": "change role",
+        "es": "change role",
+        "pl": "change role",
+        "zh-cn": "change role"
       },
       "0.1.1": {
         "en": "Fix clear timeouts",
@@ -120,7 +120,7 @@
         "type": "string",
         "read": true,
         "write": true,
-        "def": false
+        "def": ""
       },
       "native": {}
     },
@@ -132,8 +132,7 @@
         "name": "Set animation mode",
         "type": "number",
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     },
@@ -146,7 +145,7 @@
         "type": "string",
         "read": true,
         "write": false,
-        "def": false
+        "def": ""
       },
       "native": {}
     },
@@ -160,8 +159,7 @@
         "min": 0,
         "max": 255,
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     },
@@ -175,8 +173,7 @@
         "min": 0,
         "max": 255,
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     },
@@ -189,7 +186,7 @@
         "type": "string",
         "read": true,
         "write": true,
-        "def": false
+        "def": ""
       },
       "native": {}
     },
@@ -197,14 +194,13 @@
       "_id": "color_R",
       "type": "state",
       "common": {
-        "role": "level.color.red",
+        "role": "level.color",
         "name": "Set default Red color of the lamp",
         "type": "number",
         "min": 0,
         "max": 255,
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     },
@@ -218,8 +214,7 @@
         "min": 0,
         "max": 255,
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     },
@@ -233,8 +228,7 @@
         "min": 0,
         "max": 255,
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     },
@@ -246,8 +240,7 @@
         "name": "List of avilable animation modes as array",
         "type": "array",
         "read": true,
-        "write": false,
-        "def": false
+        "write": false
       },
       "native": {}
     },
@@ -259,8 +252,7 @@
         "name": "Turn On/Off",
         "type": "boolean",
         "read": true,
-        "write": true,
-        "def": false
+        "write": true
       },
       "native": {}
     }
