@@ -169,7 +169,7 @@
       "_id": "brightness",
       "type": "state",
       "common": {
-        "role": "state",
+        "role": "level.dimmer",
         "name": "Set brightness",
         "type": "number",
         "min": 0,
@@ -184,7 +184,7 @@
       "_id": "color",
       "type": "state",
       "common": {
-        "role": "state",
+        "role": "level.color.rgb",
         "name": "Set default color of the lamp",
         "type": "string",
         "read": true,
@@ -197,7 +197,7 @@
       "_id": "color_R",
       "type": "state",
       "common": {
-        "role": "state",
+        "role": "level.color.red",
         "name": "Set default Red color of the lamp",
         "type": "number",
         "min": 0,
@@ -212,7 +212,7 @@
       "_id": "color_G",
       "type": "state",
       "common": {
-        "role": "state",
+        "role": "level.color.green",
         "name": "Set default Green color of the lamp",
         "type": "number",
         "min": 0,
@@ -227,7 +227,7 @@
       "_id": "color_B",
       "type": "state",
       "common": {
-        "role": "state",
+        "role": "level.color.blue",
         "name": "Set default Blue color of the lamp",
         "type": "number",
         "min": 0,
