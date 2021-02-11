@@ -64,20 +64,20 @@ function startAdapter(options){
                 if (command === 'color_R' || command === 'color_G' || command === 'color_B' || command === 'color_W'){
                     if (!flag){
                         flag = true;
-                        timeOutRGB = setTimeout( ()=> {
+                        timeOutRGB = setTimeout(() => {
                             let r, g, b, w;
                             timeOutRGB = null;
-                            adapter.getState('color_R',  (err, state_r)=>{
+                            adapter.getState('color_R', (err, state_r) => {
                                 if (!err){
                                     r = state_r !== null ? state_r.val :0;
-                                    adapter.getState('color_G',  (err, state_g)=>{
+                                    adapter.getState('color_G', (err, state_g) => {
                                         if (!err){
                                             g = state_g !== null ? state_g.val :0;
-                                            adapter.getState('color_B',  (err, state_b)=>{
+                                            adapter.getState('color_B', (err, state_b) => {
                                                 if (!err){
                                                     b = state_b !== null ? state_b.val :0;
                                                     if (rgbw){
-                                                        adapter.getState('color_W',  (err, state_w)=>{
+                                                        adapter.getState('color_W', (err, state_w) => {
                                                             if (!err){
                                                                 w = state_w !== null ? state_w.val :0;
                                                                 send(sendChar + rgbwToHex(r, g, b, w));
@@ -171,7 +171,7 @@ function startAdapter(options){
     }));
 }
 
-let connect = ()=>{
+let connect = () => {
     mclighting && mclighting.close();
     let host = adapter.config.host ? adapter.config.host :'127.0.0.1';
     let port = adapter.config.port ? adapter.config.port :81;
@@ -188,7 +188,7 @@ let connect = ()=>{
             timeOutSend = null;
             send('~');
         }, 5000);
-        pingTimer = setInterval( ()=>{
+        pingTimer = setInterval(() => {
             mclighting.ping('ping'); // Работает только на "ws": "^5.1.0", на последних версиях возращает ошибку.
         }, 10000);
         timeoutTimer = setInterval(() => {
@@ -225,7 +225,7 @@ let connect = ()=>{
         adapter.log.debug('McLighting reconnect after 10 seconds');
         adapter.setState('info.connection', false, true);
         timeOutReconnect = setTimeout(() => {
-            timeOutReconnect = null; 
+            timeOutReconnect = null;
             connect();
         }, 10000);
     });
@@ -234,7 +234,7 @@ let connect = ()=>{
 
 function send(data){
     if (mclighting){
-        mclighting.send(data, (e)=>{
+        mclighting.send(data, (e) => {
             if (e){
                 adapter.log.error('Send command: {' + data + '}, ERROR - ' + e);
                 if (~e.toString().indexOf('CLOSED')){
@@ -297,7 +297,7 @@ function parse(data){
 
 function setStates(name, val){
     adapter.log.debug("set state name: " + name + " val: " + val);
-    adapter.getState(name,  (err, state)=>{
+    adapter.getState(name, (err, state) => {
         if (err){
             adapter.log.warn('Send this data to developers ' + name);
         } else {

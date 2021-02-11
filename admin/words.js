@@ -3,52 +3,52 @@
 'use strict';
 
 systemDictionary = {
-    "host_ip":                                              {
-        "en": "ip address ESP",
-        "de": "IP-Adresse ESP",
-        "ru": "IP-адрес ESP",
-        "pt": "endereço IP ESP",
-        "nl": "ip adres ESP",
-        "fr": "adresse IP ESP",
-        "it": "indirizzo IP ESP",
-        "es": "dirección IP ESP",
-        "pl": "adres IP ESP",
+    "host_ip": {
+        "en":    "ip address ESP",
+        "de":    "IP-Adresse ESP",
+        "ru":    "IP-адрес ESP",
+        "pt":    "endereço IP ESP",
+        "nl":    "ip adres ESP",
+        "fr":    "adresse IP ESP",
+        "it":    "indirizzo IP ESP",
+        "es":    "dirección IP ESP",
+        "pl":    "adres IP ESP",
         "zh-cn": "IP地址ESP"
     },
-    'port_':                                                {
-        "en": "WebSocket Api port your ESP (default 81)",
-        "de": "WebSocket API portieren Sie Ihr ESP (Standard 81)",
-        "ru": "Порт WebSocket API (по умолчанию 81)",
-        "pt": "A porta WebSocket Api do seu ESP (padrão 81)",
-        "nl": "WebSocket Api-poort uw ESP (standaard 81)",
-        "fr": "WebSocket Api port votre ESP (par défaut 81)",
-        "it": "WebSocket Api porta il tuo ESP (impostazione predefinita 81)",
-        "es": "WebSocket Api puerto su ESP (predeterminado 81)",
-        "pl": "WebSocket Api port ESP (domyślnie 81)",
+    'port_':   {
+        "en":    "WebSocket Api port your ESP (default 81)",
+        "de":    "WebSocket API portieren Sie Ihr ESP (Standard 81)",
+        "ru":    "Порт WebSocket API (по умолчанию 81)",
+        "pt":    "A porta WebSocket Api do seu ESP (padrão 81)",
+        "nl":    "WebSocket Api-poort uw ESP (standaard 81)",
+        "fr":    "WebSocket Api port votre ESP (par défaut 81)",
+        "it":    "WebSocket Api porta il tuo ESP (impostazione predefinita 81)",
+        "es":    "WebSocket Api puerto su ESP (predeterminado 81)",
+        "pl":    "WebSocket Api port ESP (domyślnie 81)",
         "zh-cn": "WebSocket Api端口您的ESP（默认81）"
     },
-    'host':                                                 {
-        "en": "IP address",
-        "de": "IP Adresse",
-        "ru": "IP адрес",
-        "pt": "endereço de IP",
-        "nl": "IP adres",
-        "fr": "adresse IP",
-        "it": "indirizzo IP",
-        "es": "dirección IP",
-        "pl": "adres IP",
+    'host':    {
+        "en":    "IP address",
+        "de":    "IP Adresse",
+        "ru":    "IP адрес",
+        "pt":    "endereço de IP",
+        "nl":    "IP adres",
+        "fr":    "adresse IP",
+        "it":    "indirizzo IP",
+        "es":    "dirección IP",
+        "pl":    "adres IP",
         "zh-cn": "IP地址"
     },
-    "port":                                                 {
-        "en": "Port",
-        "de": "Hafen",
-        "ru": "Порт",
-        "pt": "Porta",
-        "nl": "Haven",
-        "fr": "Port",
-        "it": "Porta",
-        "es": "Puerto",
-        "pl": "Port",
+    "port":    {
+        "en":    "Port",
+        "de":    "Hafen",
+        "ru":    "Порт",
+        "pt":    "Porta",
+        "nl":    "Haven",
+        "fr":    "Port",
+        "it":    "Porta",
+        "es":    "Puerto",
+        "pl":    "Port",
         "zh-cn": "港口"
     }
 };
