@@ -50,14 +50,14 @@
     },
     "title": "McLighting",
     "titleLang": {
-      "en": "McLighting adapter",
-      "de": "McLighting Vorlagenadapter",
+      "en": "McLighting interface",
+      "de": "McLighting Interface",
       "ru": "McLighting адаптер",
       "pt": "Adaptador de McLighting",
-      "nl": "McLighting-adapter",
-      "fr": "McLighting adapter",
-      "it": "McLighting adapter",
-      "es": "McLighting adapter"
+      "nl": "McLighting interface",
+      "fr": "McLighting interface",
+      "it": "McLighting interface",
+      "es": "McLighting interface"
     },
     "desc": {
       "en": "Control the ESP8266 based multi-client lighting gadget",
