@@ -23,7 +23,7 @@
     "url": "https://github.com/instalator/ioBroker.mclighting"
   },
   "dependencies": {
-    "ws": "^5.1.0",
+    "ws": "^8.13.0",
     "@iobroker/adapter-core": "^2.4.0"
   },
   "devDependencies": {
