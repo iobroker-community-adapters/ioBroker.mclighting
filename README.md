@@ -125,10 +125,9 @@ Where <brightness> is the brightness as value 0-255.
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.2.0 (2024-04-19)
 - (mcm1957) Adapter requires node.js >= 18 and js-controller >= 5 now
 - (mcm1957) Dependencies have been updated
-
 
 ### 0.1.2
 * (instalator) change role
