@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "ws": "^8.16.0",
-    "@iobroker/adapter-core": "^2.4.0"
+    "@iobroker/adapter-core": "^3.1.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.7.0",
