@@ -72,7 +72,10 @@
     "authors": [
       "instalator <vvvalt@mail.ru>"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "mclighting.png",
@@ -90,7 +93,18 @@
     "readme": "https://github.com/instalator/ioBroker.mclighting/blob/master/README.md",
     "localLink": "%web_protocol%://%native_host%:80",
     "loglevel": "info",
-    "type": "lighting"
+    "tier": 2,
+    "type": "lighting",
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.19"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=6.13.16"
+      }
+    ]
   },
   "native": {
     "host": "127.0.0.1",
