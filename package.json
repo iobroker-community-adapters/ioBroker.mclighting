@@ -9,6 +9,7 @@
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.mclighting",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "mclighting",
     "rgb",
     "rgbw",
