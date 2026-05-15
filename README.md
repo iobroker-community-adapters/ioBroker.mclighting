@@ -168,6 +168,8 @@ Where <brightness> is the brightness as value 0-255.
 ### 0.0.1 (2018-03-24)
 * (instalator) initial
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 The MIT License (MIT)
