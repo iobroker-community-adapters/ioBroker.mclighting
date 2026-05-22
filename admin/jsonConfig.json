@@ -1,0 +1,34 @@
+{
+  "type": "panel",
+  "items": {
+    "host": {
+      "type": "text",
+      "label": "host",
+      "help": "host_ip",
+      "xs": 12,
+      "sm": 12,
+      "md": 8,
+      "lg": 6,
+      "xl": 5
+    },
+    "port": {
+      "type": "number",
+      "label": "port",
+      "help": "port_",
+      "xs": 12,
+      "sm": 12,
+      "md": 4,
+      "lg": 3,
+      "xl": 2
+    },
+    "rgbw": {
+      "type": "checkbox",
+      "label": "RGBW",
+      "xs": 12,
+      "sm": 12,
+      "md": 12,
+      "lg": 12,
+      "xl": 12
+    }
+  }
+}
