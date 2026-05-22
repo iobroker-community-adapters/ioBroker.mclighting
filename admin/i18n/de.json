@@ -3,5 +3,5 @@
   "host": "IP Adresse",
   "host_ip": "IP-Adresse ESP",
   "port": "Port",
-  "port_": "WebSocket API portieren Sie Ihr ESP (Standard 81)"
+  "port_": "WebSocket-API-Port Ihres ESP (Standard 81)"
 }
