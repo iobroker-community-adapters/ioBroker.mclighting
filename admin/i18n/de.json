@@ -2,6 +2,6 @@
   "RGBW": "RGBW",
   "host": "IP Adresse",
   "host_ip": "IP-Adresse ESP",
-  "port": "Hafen",
+  "port": "Port",
   "port_": "WebSocket API portieren Sie Ihr ESP (Standard 81)"
 }

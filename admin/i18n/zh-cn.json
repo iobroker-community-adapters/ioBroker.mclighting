@@ -2,6 +2,6 @@
   "RGBW": "RGBW",
   "host": "IP地址",
   "host_ip": "IP地址ESP",
-  "port": "港口",
+  "port": "端口",
   "port_": "WebSocket Api端口您的ESP（默认81）"
 }
