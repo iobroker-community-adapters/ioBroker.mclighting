@@ -131,6 +131,7 @@ Where <brightness> is the brightness as value 0-255.
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (copilot) Adapter requires js-controller >= 6.0.11 now
 - (copilot) Adapter requires admin >= 7.6.17 now
+- (copilot) **ENHANCED**: Migrated adapter admin configuration to jsonConfig.
 
 ### 0.2.0 (2024-04-19)
 - (mcm1957) Adapter requires node.js >= 18 and js-controller >= 5 now

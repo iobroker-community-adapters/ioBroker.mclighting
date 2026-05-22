@@ -94,6 +94,9 @@
     "mode": "daemon",
     "icon": "mclighting.png",
     "materialize": true,
+    "adminUI": {
+      "config": "json"
+    },
     "enabled": false,
     "compact": true,
     "extIcon": "https://raw.githubusercontent.com/instalator/ioBroker.mclighting/master/admin/mclighting.png",

@@ -1,0 +1,7 @@
+{
+  "RGBW": "RGBW",
+  "host": "IP Adresse",
+  "host_ip": "IP-Adresse ESP",
+  "port": "Port",
+  "port_": "WebSocket API Port Ihres ESP (Standard 81)"
+}
